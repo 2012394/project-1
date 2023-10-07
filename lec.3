@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract lec {
+    address[] public white;
+    mapping (address=> uint256)balances;
+    event Transfer(address sender, address recipent, uint amount);
+    function setbalances(uint amount) external {
+
+        balances[msg.sender] =amount;
+        white.push(msg.sender);
+
+
+    }
+    function transfer(address recipent, uint amount) public {
+        require(amount<= balances[msg.sender], "insufficient amount");
+        balances[msg.sender] -=amount;
+        balances[recipent] += amount;
+        emit Transfer(msg.sender,recipent,amount);
+    }
+    function getwhite() public view returns (address[]memory){
+        return white;
+
+
+    }
+// function print () public retunrs (sstring memory){
+    //"helloworld";
+
+}
+
+
